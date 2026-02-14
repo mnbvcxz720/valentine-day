@@ -21,13 +21,44 @@ button{
   cursor:pointer;
 }
 
-/* slideshow image */
-img{
-  width:300px;
-  height:400px;
-  border-radius:20px;
-  box-shadow:0 0 30px hotpink;
-  transition:all 1s ease;
+/* 📸 SLIDESHOW IMAGES */
+let images=[
+"./Screenshot_20260214_143259_Instagram.jpg",
+"./Screenshot_20260214_143133_Instagram.jpg",
+"./Screenshot_20260214_143116_Instagram.jpg",
+"./Screenshot_20260214_143104_Instagram.jpg",
+"./Screenshot_20260214_143036_Instagram.jpg",
+"./Screenshot_20260214_143020_Instagram.jpg",
+"./Screenshot_20260214_143002_Instagram.jpg",
+"./Screenshot_20260214_142942_Instagram.jpg"
+];
+
+let index=0;
+let started=false;
+
+function startLove(){
+
+  if(started) return;
+  started=true;
+
+  document.getElementById("slideshow").style.display="block";
+
+  showNextImage();
+  hearts();
+  fireworks();
+}
+
+function showNextImage(){
+
+  let img=document.getElementById("photo");
+
+  img.src=images[index];
+
+  index++;
+  if(index>=images.length) index=0;
+
+  setTimeout(showNextImage,3000);
+  }
 }
 
 /* floating hearts */
