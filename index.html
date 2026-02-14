@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Valentine Surprise ❤️</title>
+
+<style>
+body{
+  text-align:center;
+  font-family:Arial;
+  background:linear-gradient(pink, white);
+  overflow:hidden;
+}
+
+/* buttons */
+button{
+  padding:15px 25px;
+  font-size:18px;
+  margin:10px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+/* slideshow image */
+img{
+  width:300px;
+  height:400px;
+  border-radius:20px;
+  box-shadow:0 0 30px hotpink;
+  transition:all 1s ease;
+}
+
+/* floating hearts */
+.heart{
+  position:fixed;
+  color:red;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);opacity:1;}
+  100%{transform:translateY(-10vh);opacity:0;}
+}
+
+/* fireworks */
+.firework{
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:red;
+  animation:explode 1s ease-out infinite;
+}
+
+@keyframes explode{
+  0%{transform:scale(1);}
+  100%{transform:scale(10);opacity:0;}
+}
+
+#slideshow{display:none;margin-top:20px;}
+</style>
+</head>
+
+<body>
+
+<h1 id="type"></h1>
+
+<h2>Will you be my Valentine?</h2>
+
+<button onclick="startLove()">YES ❤️</button>
+<button id="noBtn" onmouseover="runAway()">NO 😢</button>
+
+<div id="slideshow">
+  <img id="photo" src="pic1.jpg">
+</div>
+
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/r3oAMDsC-8Y?autoplay=1&loop=1&playlist=r3oAMDsC-8Y"
+frameborder="0" allow="autoplay">
+</iframe>
+
+<script>
+
+/* ❤️ TYPEWRITER MESSAGE */
+let text="Happy Valentine's Day ❤️ You make my world beautiful";
+let i=0;
+function typing(){
+  if(i<text.length){
+    document.getElementById("type").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typing,80);
+  }
+}
+typing();
+
+/* 😂 NO BUTTON RUNS AWAY */
+function runAway(){
+  let btn=document.getElementById("noBtn");
+  btn.style.position="absolute";
+  btn.style.left=Math.random()*300+"px";
+  btn.style.top=Math.random()*300+"px";
+}
+
+/* 📸 SLIDESHOW */
+let images=[
+"Screenshot_20260214_143259_Instagram.jpg",
+"Screenshot_20260214_143133_Instagram.jpg",
+"Screenshot_20260214_143116_Instagram.jpg",
+"Screenshot_20260214_143104_Instagram.jpg",
+"Screenshot_20260214_143036_Instagram.jpg",
+"Screenshot_20260214_143020_Instagram.jpg",
+"Screenshot_20260214_143002_Instagram.jpg",
+"Screenshot_20260214_142942_Instagram.jpg"
+];
+
+let index=0;
+
+function startLove(){
+  document.getElementById("music").play();
+  document.getElementById("slideshow").style.display="block";
+  changeImage();
+  hearts();
+  fireworks();
+}
+
+/* zoom + fade effect */
+function changeImage(){
+  let img=document.getElementById("photo");
+  img.style.opacity=0;
+  img.style.transform="scale(0.8)";
+
+  setTimeout(()=>{
+    img.src=images[index];
+    img.style.opacity=1;
+    img.style.transform="scale(1)";
+    index=(index+1)%images.length;
+  },500);
+
+  setTimeout(changeImage,3000);
+}
+
+/* floating hearts */
+function hearts(){
+  setInterval(()=>{
+    let heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    document.body.appendChild(heart);
+
+    setTimeout(()=>heart.remove(),5000);
+  },300);
+}
+
+/* fireworks */
+function fireworks(){
+  setInterval(()=>{
+    let fw=document.createElement("div");
+    fw.className="firework";
+    fw.style.left=Math.random()*100+"vw";
+    fw.style.top=Math.random()*100+"vh";
+    document.body.appendChild(fw);
+
+    setTimeout(()=>fw.remove(),1000);
+  },500);
+}
+
+</script>
+
+</body>
+</html>
